@@ -62,7 +62,12 @@
 
     <div class="custom-cursor__cursor"></div>
     <div class="custom-cursor__cursor-two"></div>
+<style>
+   .loader.js-preloader div {
+    background-color: #3498db; /* Change this to your desired dot color */
+}
 
+</style>
     <!--Start Preloader-->
     <div class="loader js-preloader">
         <div></div>
@@ -79,7 +84,7 @@
                         <div class="main-menu__wrapper-inner">
                             <div class="main-menu__left">
                                 <div class="main-menu__logo">
-                                    <a href="index.html"><img src="assets/images/icon/1-removebg-preview.png" alt="" style="width:300px; height:100px;"></a>
+                                    <a href="index.html"><img src="assets/images/icon/1-removebg-preview.png" alt="" style="width:200px; height:100px;"></a>
                                 </div>
                             </div>
 
@@ -1287,7 +1292,6 @@
 
     </div><!-- /.page-wrapper -->
 
-
     <div class="mobile-nav__wrapper">
         <div class="mobile-nav__overlay mobile-nav__toggler"></div>
         <!-- /.mobile-nav__overlay -->
@@ -1374,10 +1378,51 @@
     <script src="assets/js/gsap/SplitText.js"></script>
 
 
+<script>
+    // Close mobile nav on menu link click (for single-page site)
+    document.querySelectorAll('.mobile-nav__content a[href^="#"]').forEach(link => {
+        link.addEventListener('click', function () {
+            const mobileNav = document.querySelector('.mobile-nav__wrapper');
+            if (mobileNav.classList.contains('active')) {
+                mobileNav.classList.remove('active');
+            }
+        });
+    });
+</script>
 
 
     <!-- template js -->
     <script src="assets/js/script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const navToggler = document.querySelector(".mobile-nav__toggler");
+        const mobileWrapper = document.querySelector(".mobile-nav__wrapper");
+        const mobileContent = document.querySelector(".mobile-nav__content");
+        const links = document.querySelectorAll(".scrollToLink a");
+
+        // Close sidebar on menu link click (for single page scroll)
+        links.forEach(link => {
+            link.addEventListener("click", function () {
+                // Timeout gives time for scroll to happen before closing menu
+                setTimeout(() => {
+                    mobileWrapper.classList.remove("expanded");
+                    document.body.classList.remove("locked"); // if you lock scroll
+                }, 100);
+            });
+        });
+
+        // Also close when clicking the close icon (already working)
+        const closeBtn = document.querySelector(".mobile-nav__close");
+        if (closeBtn) {
+            closeBtn.addEventListener("click", () => {
+                mobileWrapper.classList.remove("expanded");
+                document.body.classList.remove("locked");
+            });
+        }
+    });
+</script>
+  
+
 </body>
 
 </html>
